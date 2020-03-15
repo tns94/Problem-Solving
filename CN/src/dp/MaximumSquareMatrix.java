@@ -1,31 +1,31 @@
 package dp;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 //Find maximum Square in matrix with all Zeros
 public class MaximumSquareMatrix {
-    static boolean isValidZeroMarix(int[][] input , int ii,int jj,int kk,int ll)
-    {
-        for (int i = ii; i <= kk; i++) {
-            for (int j = jj; j <= ll; j++) {
-                if (input[i][j]==1)
-                    return false;
-            }
-        }
-        return true;
-    }
+
 
     public static int findMaxSquareWithAllZeros(int[][] input){
         int m=input.length;
         int n=input[0].length;
         int max=0;
-        boolean[][] bool=new boolean[m][n];
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
+        int dp[][] =new int[m][n];
+        for (int i = 0; i < m; i++)
+            dp[i][0]=input[i][0]==0?1:0;
+        for (int j = 0; j < n; j++)
+            dp[0][j]=input[0][j]==0?1:0;
 
-                for (int k = i,l=j; k < m && l < n; k++,l++) {
-                        if(isValidZeroMarix(input,i,j,k,l))
-                            max=max<(k-i+1)?k-i+1:max;
+
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                if(input[i][j]==0) {
+                    dp[i][j] = Math.min(dp[i - 1][j - 1], Math.min(dp[i - 1][j], dp[i][j - 1])) + 1;
+                    max = dp[i][j] > max ? dp[i][j] : max;
                 }
+                else
+                    dp[i][j]=0;
             }
         }
         return max;
