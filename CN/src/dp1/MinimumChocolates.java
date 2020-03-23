@@ -4,7 +4,7 @@ package dp;
 public class MinimumChocolates {
     public static int getMin(int arr[], int N){
 
-        int dp[]=new int[N];
+        int[] dp =new int[N];
         dp[0]=1;
         for (int i = 1; i < N; i++) {
             if(arr[i-1]<arr[i])

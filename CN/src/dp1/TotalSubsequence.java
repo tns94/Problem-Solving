@@ -19,7 +19,7 @@ public class TotalSubsequence {
         Scanner sc=new Scanner(System.in);
         int n=sc.nextInt();
         int[] arr=new int[n];
-        long dp[][]=new long[n][101];
+        long[][] dp =new long[n][101];
         for (int i = 0; i < n; i++) arr[i] = sc.nextInt();
 
         int ng;
