@@ -4,17 +4,19 @@ import java.util.Scanner;
 
 public class CharlieAndPilot {
 
-    static int minSalary(int[] cap,int[] ast,int as,int ca,int si)
+    static int minSalary(int[] cap,int[] ast,int x,int si,int n,int dp[][])
     {
         if(si==ast.length)
             return 0;
 
-        if(as-ca==0)
-            return  minSalary(cap,ast,as+1,ca,si+1)+ast[si];
-        else if((as-ca)==ast.length-si)
-            return  minSalary(cap,ast,as,ca+1,si+1)+cap[si];
+        if(dp[n][x]!=0)
+            return dp[n][x];
+        if(x==0)
+            return  dp[n][x]=minSalary(cap,ast,x+1,si+1,n-1,dp)+ast[si];
+        else if(x==n)
+            return  dp[n][x]=minSalary(cap,ast,x-1,si+1,n-1,dp)+cap[si];
         else
-            return Math.min(minSalary(cap,ast,as,ca+1,si+1)+cap[si],minSalary(cap,ast,as+1,ca,si+1)+ast[si]);
+            return dp[n][x]=Math.min(minSalary(cap,ast,x-1,si+1,n-1,dp)+cap[si],minSalary(cap,ast,x+1,si+1,n-1,dp)+ast[si]);
     }
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
@@ -26,6 +28,7 @@ public class CharlieAndPilot {
             cap[i]=sc.nextInt();
             ast[i]=sc.nextInt();
         }
-        System.out.println(minSalary(cap,ast,0,0,0));
+        int dp[][]=new int[n+1][n+1];
+        System.out.println(minSalary(cap,ast,0,0,n,dp));
     }
 }
