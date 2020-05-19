@@ -1,1 +1,1 @@
-# Problem-Solving CodingNinjas Competitive Programming solutions
+CodingNinjas Competitive Programming solutions
